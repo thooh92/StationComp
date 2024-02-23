@@ -8,6 +8,7 @@ rm(list = ls())
 library(terra)
 library(data.table)
 library(raster)
+library(ggplot2)
 
 # Load data
   # Locations
@@ -26,16 +27,6 @@ files    <- list.files(pattern = ".gri$")
 
 
 dates     <- seq(as.Date("1996-01-01"), as.Date("2025-12-31"), "day")
-
-############################
-dates_IPSL<- dates[!grepl(x = dates, pattern = "-02-29$")]
-dates_MOHC<- dates_IPSL[!grepl(x = dates_IPSL, pattern = "-05-31$") &
-                          !grepl(x = dates_IPSL, pattern = "-07-31$") &
-                          !grepl(x = dates_IPSL, pattern = "-08-31$") &
-                          !grepl(x = dates_IPSL, pattern = "-10-31$") &
-                          !grepl(x = dates_IPSL, pattern = "-12-31$") ]
-############################
-
 weeks     <- format(dates, format = "%G-%V")
 
 
@@ -56,9 +47,5 @@ for(i in 1:length(files)){
   }
 }
 
-
-
-
-
-
+write.csv(ext_df2, "S:/MIRO_Scenarios/interface_avail/models_weekly.csv")
 
